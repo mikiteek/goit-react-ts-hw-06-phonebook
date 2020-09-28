@@ -1,6 +1,9 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
+import {CSSTransition} from "react-transition-group";
 import styles from "./ContactForm.module.scss";
+import "./ContactFormAnimation.css";
+
 
 class ContactForm extends Component {
   state = {
@@ -25,7 +28,9 @@ class ContactForm extends Component {
     const inputStyles = [styles.formElement, styles.formInput].join(" ");
     return (
       <section className={styles.sectionContacts}>
-        <h2 className={styles.title}>Phonebook</h2>
+        <CSSTransition in={true} appear={true} timeout={500} classNames="ContactFormTitle" unmountOnExit>
+          <h2 className={styles.title}>Phonebook</h2>
+        </CSSTransition>
         <form className={styles.formContacts} onSubmit={this.handleSubmit}>
           <label className={styles.formElement} htmlFor="name">Name</label>
           <input className={inputStyles} type="text" name="name" onChange={this.handleChange}/>

@@ -1,0 +1,7 @@
+.ContactFormTitle-appear {
+  transform: translateX(-100%);
+}
+.ContactFormTitle-appear-active {
+  transform: translateY(0);
+  transition: transform 500ms linear;
+}
