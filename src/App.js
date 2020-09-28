@@ -4,8 +4,9 @@ import Layout from "./components/Layout/Layout";
 import ContactForm from "./components/ContactForm/ContactForm";
 import SectionContacts from "./components/SectionContacts/SectionContacts";
 import Contact from "./components/Contact/Contact";
-import ListContact from "./components/ListContact/ListContact";
 import Filter from "./components/Filter/Filter";
+import {TransitionGroup, CSSTransition} from "react-transition-group";
+import "./AppAnimation.css";
 
 class App extends Component {
   state = {
@@ -69,11 +70,13 @@ class App extends Component {
         <ContactForm onSubmit={this.addContact}/>
         <SectionContacts title={"Contacts"}>
           <Filter onChangeFilter={this.changeFilter}/>
-          {contacts.length > 0 && <ListContact>
+          <TransitionGroup component="ul" in={(contacts.length > 0).toString()}>
             {contacts.map(({name, number, id}) => (
-              <Contact key={id} name={name} number={number} onClick={this.deleteContact} id={id}/>
+              <CSSTransition key={id} timeout={250} classNames="ContactsItem">
+                <Contact name={name} number={number} onClick={this.deleteContact} id={id}/>
+              </CSSTransition>
             ))}
-          </ListContact>}
+          </TransitionGroup>
         </SectionContacts>
       </Layout>
     );
