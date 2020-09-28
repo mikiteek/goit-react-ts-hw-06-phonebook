@@ -2,6 +2,6 @@
   transform: translateX(-100%);
 }
 .ContactFormTitle-appear-active {
-  transform: translateY(0);
+  transform: translateX(0);
   transition: transform 500ms linear;
 }

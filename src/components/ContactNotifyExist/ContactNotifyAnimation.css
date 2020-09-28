@@ -1,0 +1,21 @@
+.ContactNotify-enter {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.ContactNotify-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 250ms linear;
+}
+
+.ContactNotify-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ContactNotify-exit-active {
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: all 250ms linear;
+}
