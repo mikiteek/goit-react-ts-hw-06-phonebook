@@ -1,0 +1,25 @@
+.FilterAnimation-appear {
+  transform: scale(0.1);
+}
+
+.FilterAnimation-appear-active {
+  transform: scale(1);
+  transition: all 250ms linear;
+}
+.FilterAnimation-enter {
+  transform: scale(0.1);
+}
+
+.FilterAnimation-enter-active {
+  transform: scale(1);
+  transition: all 250ms linear;
+}
+
+.FilterAnimation-exit {
+  transform: scale(1);
+}
+
+.FilterAnimation-exit-active {
+  transform: scale(0.1);
+  transition: all 250ms linear;
+}
