@@ -1,0 +1,17 @@
+.ContactsItem-enter {
+  transform: translateX(-100%);
+}
+
+.ContactsItem-enter-active {
+  transform: translateX(0);
+  transition: transform 250ms linear;
+}
+
+.ContactsItem-exit {
+  transform: translateX(0);
+}
+
+.ContactsItem-exit-active {
+  transform: translateX(-100%);
+  transition: transform 250ms linear;
+}
