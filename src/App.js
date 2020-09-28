@@ -8,7 +8,6 @@ import Contact from "./components/Contact/Contact";
 import Filter from "./components/Filter/Filter";
 import ContactNotifyExist from "./components/ContactNotifyExist/ContactNotifyExist";
 import "./AppAnimation.css";
-import "./components/ContactNotifyExist/ContactNotifyAnimation.css";
 
 class App extends Component {
   state = {
@@ -74,18 +73,20 @@ class App extends Component {
   }
 
   render() {
-    const contacts = this.getVisibleContacts();
-    const {notify} = this.state;
+    const visibleContacts = this.getVisibleContacts();
+    const {notify, contacts} = this.state;
     return (
       <Layout>
-        <CSSTransition timeout={250} in={notify} classNames="ContactNotify">
+        <CSSTransition timeout={250} in={notify} classNames="ContactNotify" unmountOnExit>
           <ContactNotifyExist/>
         </CSSTransition>
         <ContactForm onSubmit={this.addContact}/>
         <SectionContacts title={"Contacts"}>
-          <Filter onChangeFilter={this.changeFilter}/>
-          <TransitionGroup component="ul" in={(contacts.length > 0).toString()}>
-            {contacts.map(({name, number, id}) => (
+          <CSSTransition timeout={250} in={contacts.length > 1} classNames="FilterAnimation" unmountOnExit>
+            <Filter onChangeFilter={this.changeFilter}/>
+          </CSSTransition>
+          <TransitionGroup component="ul" in={(visibleContacts.length > 0).toString()}>
+            {visibleContacts.map(({name, number, id}) => (
               <CSSTransition key={id} timeout={250} classNames="ContactsItem">
                 <Contact name={name} number={number} onClick={this.deleteContact} id={id}/>
               </CSSTransition>
