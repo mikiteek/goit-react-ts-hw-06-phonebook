@@ -9,11 +9,17 @@ class Contact extends Component {
     number: PropTypes.string.isRequired,
   }
 
+  handleDeleteContact = () => {
+    const {onClick, id} = this.props;
+    onClick(id);
+  }
+
   render() {
     const {name, number} = this.props;
     return (
       <li className={styles.contactItem}>
         <p className={styles.contactInfo}>{name}: {number}</p>
+        <button className={styles.btn} type="button" onClick={this.handleDeleteContact}>Delete</button>
       </li>
     );
   }

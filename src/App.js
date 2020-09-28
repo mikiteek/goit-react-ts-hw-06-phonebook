@@ -5,6 +5,7 @@ import ContactForm from "./components/ContactForm/ContactForm";
 import SectionContacts from "./components/SectionContacts/SectionContacts";
 import Contact from "./components/Contact/Contact";
 import ListContact from "./components/ListContact/ListContact";
+import Filter from "./components/Filter/Filter";
 
 class App extends Component {
   state = {
@@ -14,6 +15,7 @@ class App extends Component {
       {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
       {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
     ],
+    filter: "",
   };
 
   addContact = ({name, number}) => {
@@ -34,16 +36,29 @@ class App extends Component {
       contacts: [...contacts, contactNew],
     }));
   };
+  deleteContact = idContact => {
+    this.setState(({contacts}) => ({
+      contacts: contacts.filter(({id}) => id !== idContact),
+    }));
+  }
+  getVisibleContacts = () => {
+    const {filter, contacts} = this.state;
+    return contacts.filter(({name}) => name.toLowerCase().includes(filter.toLowerCase()));
+  }
+  changeFilter = event => {
+    this.setState({filter: event.target.value});
+  }
 
   render() {
-    const {contacts} = this.state;
+    const contacts = this.getVisibleContacts();
     return (
       <Layout>
         <ContactForm onSubmit={this.addContact}/>
         <SectionContacts title={"Contacts"}>
+          <Filter onChangeFilter={this.changeFilter}/>
           {contacts.length > 0 && <ListContact>
             {contacts.map(({name, number, id}) => (
-              <Contact key={id} name={name} number={number}/>
+              <Contact key={id} name={name} number={number} onClick={this.deleteContact} id={id}/>
             ))}
           </ListContact>}
         </SectionContacts>
