@@ -1,0 +1,42 @@
+.sectionContacts {
+  margin-bottom: 20px;
+}
+.title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  color: #4f4fce;
+  margin-bottom: 15px;
+}
+
+.formContacts {
+  padding: 20px;
+  width: 320px;
+  border-radius: 2px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.formElement {
+  font-family: "Montserrat", sans-serif;
+  display: block;
+  width: 100%
+}
+
+.formInput {
+  padding-left: 10px;
+  height: 36px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.btn {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  height: 36px;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  background-color: #4f4fce;
+  border: 0;
+  border-radius: 2px;
+  color: #fff;
+}
