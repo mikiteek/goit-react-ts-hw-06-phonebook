@@ -80,7 +80,7 @@ class App extends Component {
         {/*<CSSTransition timeout={250} in={notify} classNames="ContactNotify" unmountOnExit>*/}
         {/*  <ContactNotifyExist/>*/}
         {/*</CSSTransition>*/}
-        {/*<ContactForm onSubmit={this.addContact}/>*/}
+        <ContactForm/>
         {/*<SectionContacts title={"Contacts"}>*/}
         {/*  <CSSTransition timeout={250} in={contacts.length > 1} classNames="FilterAnimation" unmountOnExit>*/}
         {/*    <Filter onChangeFilter={this.changeFilter}/>*/}

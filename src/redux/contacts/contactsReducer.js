@@ -1,7 +1,13 @@
 import {combineReducers} from "redux";
+import actionTypes from "./contactsTypes";
 
-
-const items = (state = [], action) => state;
+const items = (state = [], {type, payload}) => {
+  switch (type) {
+    case actionTypes.ADD_CONTACT:
+      return [...state, payload.contact];
+    default: return state;
+  }
+};
 
 const filter = (state = "", action) => state;
 

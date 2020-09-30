@@ -1,8 +1,8 @@
 import {v4 as uuid} from "uuid";
-import types from "./contactsTypes";
+import actionTypes from "./contactsTypes";
 
 const addContact = ({name, number}) => ({
-  type: types.ADD_CONTACT,
+  type: actionTypes.ADD_CONTACT,
   payload: {
     contact: {
       id: uuid(),
@@ -13,14 +13,14 @@ const addContact = ({name, number}) => ({
 });
 
 const deleteContact = idContact => ({
-  type: types.DELETE_CONTACT,
+  type: actionTypes.DELETE_CONTACT,
   payload: {
     idContact,
   },
 });
 
 const changeFilter = event => ({
-  type: types.UPDATE_FILTER,
+  type: actionTypes.UPDATE_FILTER,
   payload: {
     filter: event.target.value,
   },
