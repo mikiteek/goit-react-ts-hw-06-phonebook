@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {TransitionGroup, CSSTransition} from "react-transition-group";
-import {v4 as uuid} from "uuid";
+import {connect} from "react-redux";
 import Layout from "./components/Layout/Layout";
 import ContactForm from "./components/ContactForm/ContactForm";
 import SectionContacts from "./components/SectionContacts/SectionContacts";
@@ -73,7 +73,7 @@ class App extends Component {
   // }
 
   render() {
-    // const visibleContacts = this.getVisibleContacts();
+    const {visibleContacts} = this.props;
     // const {notify, contacts} = this.state;
     return (
       <Layout>
@@ -81,22 +81,26 @@ class App extends Component {
         {/*  <ContactNotifyExist/>*/}
         {/*</CSSTransition>*/}
         <ContactForm/>
-        {/*<SectionContacts title={"Contacts"}>*/}
+        <SectionContacts title={"Contacts"}>
         {/*  <CSSTransition timeout={250} in={contacts.length > 1} classNames="FilterAnimation" unmountOnExit>*/}
         {/*    <Filter onChangeFilter={this.changeFilter}/>*/}
         {/*  </CSSTransition>*/}
-        {/*  <TransitionGroup component="ul" in={(visibleContacts.length > 0).toString()}>*/}
-        {/*    {visibleContacts.map(({name, number, id}) => (*/}
-        {/*      <CSSTransition key={id} timeout={250} classNames="ContactsItem">*/}
-        {/*        <Contact name={name} number={number} onClick={this.deleteContact} id={id}/>*/}
-        {/*      </CSSTransition>*/}
-        {/*    ))}*/}
-        {/*  </TransitionGroup>*/}
-        {/*</SectionContacts>*/}
+          <TransitionGroup component="ul" in={(visibleContacts.length > 0).toString()}>
+            {visibleContacts.map(({name, number, id}) => (
+              <CSSTransition key={id} timeout={250} classNames="ContactsItem">
+                <Contact name={name} number={number} id={id}/>
+              </CSSTransition>
+            ))}
+          </TransitionGroup>
+        </SectionContacts>
       </Layout>
     );
   }
 
 }
 
-export default App;
+const mapStateToProps = state => ({
+  visibleContacts: state.contacts.items,
+})
+
+export default connect(mapStateToProps)(App);

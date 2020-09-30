@@ -19,6 +19,8 @@ class ContactForm extends Component {
     event.preventDefault();
     const {name, number} = this.state;
 
+    if (name === "" || number === "")
+      return;
     this.props.onSubmit({name, number});
   }
   handleChange = event => {
