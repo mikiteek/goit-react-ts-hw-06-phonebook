@@ -1,6 +1,8 @@
 import React, {Component} from "react";
+import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {CSSTransition} from "react-transition-group";
+import contactsActions from "../../redux/contacts/contactsActions";
 import styles from "./ContactForm.module.scss";
 import "./ContactFormAnimation.css";
 
@@ -16,8 +18,15 @@ class ContactForm extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const {name, number} = this.state;
+    const {onSubmit, onShowNotify, contacts} = this.props;
 
-    this.props.onSubmit({name, number});
+    if (name === "" || number === "")
+      return;
+    if (contacts.findIndex(contact => contact.name === name) !== -1) {
+      onShowNotify(true);
+      return;
+    }
+    onSubmit({name, number});
   }
   handleChange = event => {
     const {name, value} = event.target;
@@ -43,4 +52,14 @@ class ContactForm extends Component {
     );
   }
 }
-export default ContactForm;
+
+const mapStateToProps = state => ({
+  contacts: state.contacts.items,
+})
+
+const mapDispatchToProps = {
+  onSubmit: contactsActions.addContact,
+  onShowNotify: contactsActions.toggleNotify
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

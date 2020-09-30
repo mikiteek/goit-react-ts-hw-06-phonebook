@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import contactsActions from "../../redux/contacts/contactsActions";
 import styles from "./Contact.module.scss";
 
 
@@ -11,8 +13,8 @@ class Contact extends Component {
   }
 
   handleDeleteContact = () => {
-    const {onClick, id} = this.props;
-    onClick(id);
+    const {onDeleteContact, id} = this.props;
+    onDeleteContact(id);
   }
 
   render() {
@@ -26,4 +28,8 @@ class Contact extends Component {
   }
 }
 
-export default Contact;
+const mapDispatchToProps = {
+  onDeleteContact: contactsActions.deleteContact,
+}
+
+export default connect(null, mapDispatchToProps)(Contact);
