@@ -73,7 +73,7 @@ class App extends Component {
   // }
 
   render() {
-    const {visibleContacts} = this.props;
+    const {visibleContacts, contacts} = this.props;
     // const {notify, contacts} = this.state;
     return (
       <Layout>
@@ -82,9 +82,9 @@ class App extends Component {
         {/*</CSSTransition>*/}
         <ContactForm/>
         <SectionContacts title={"Contacts"}>
-        {/*  <CSSTransition timeout={250} in={contacts.length > 1} classNames="FilterAnimation" unmountOnExit>*/}
-        {/*    <Filter onChangeFilter={this.changeFilter}/>*/}
-        {/*  </CSSTransition>*/}
+          <CSSTransition timeout={250} in={contacts.length > 1} classNames="FilterAnimation" unmountOnExit>
+            <Filter/>
+          </CSSTransition>
           <TransitionGroup component="ul" in={(visibleContacts.length > 0).toString()}>
             {visibleContacts.map(({name, number, id}) => (
               <CSSTransition key={id} timeout={250} classNames="ContactsItem">
@@ -99,8 +99,12 @@ class App extends Component {
 
 }
 
-const mapStateToProps = state => ({
-  visibleContacts: state.contacts.items,
-})
+const mapStateToProps = state => {
+  const {items, filter} = state.contacts;
+  return {
+    visibleContacts: items.filter(({name}) => name.toLowerCase().includes(filter.toLowerCase())),
+    contacts: state.contacts.items,
+  }
+}
 
 export default connect(mapStateToProps)(App);

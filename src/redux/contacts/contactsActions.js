@@ -19,10 +19,10 @@ const deleteContact = idContact => ({
   },
 });
 
-const changeFilter = event => ({
+const changeFilter = filter => ({
   type: actionTypes.UPDATE_FILTER,
   payload: {
-    filter: event.target.value,
+    filter,
   },
 });
 
