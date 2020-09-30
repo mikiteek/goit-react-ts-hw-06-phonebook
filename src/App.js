@@ -21,12 +21,13 @@ class App extends Component {
       setTimeout(this.hiddenNotify, 2000);
     }
   }
-  // componentDidMount() { // как быть сдесь? как записать исходные данные
-  //   const contactsLocalStorage = localStorage.getItem("contacts");
-  //   if (contactsLocalStorage) {
-  //     this.setState({contacts: JSON.parse(contactsLocalStorage)});
-  //   }
-  // }
+  componentDidMount() { // как быть сдесь? как записать исходные данные
+    const contactsLocalStorage = localStorage.getItem("contacts");
+    const {saveContactsFromLS} = this.props;
+    if (contactsLocalStorage) {
+      saveContactsFromLS(JSON.parse(contactsLocalStorage))
+    }
+  }
 
   hiddenNotify = () => {
     this.props.onHiddenNotify(false);
@@ -69,6 +70,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   onHiddenNotify: contactsActions.toggleNotify,
+  saveContactsFromLS: contactsActions.getContactsFromLocalStorage,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

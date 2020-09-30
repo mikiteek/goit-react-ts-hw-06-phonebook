@@ -3,6 +3,7 @@ const types = {
   DELETE_CONTACT: "contact/delete",
   UPDATE_FILTER: "contact/changeFilter",
   TOGGLE_NOTIFY: "contact/toggleNotify",
+  GET_LOCAL: "contacts/getContactsFromLocalStorage",
 }
 
 export default types;

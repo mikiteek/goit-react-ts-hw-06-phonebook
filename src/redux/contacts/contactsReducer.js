@@ -7,6 +7,8 @@ const items = (state = [], {type, payload}) => {
       return [...state, payload.contact];
     case actionTypes.DELETE_CONTACT:
       return state.filter(contact => contact.id !== payload.idContact);
+    case actionTypes.GET_LOCAL:
+      return payload.contacts;
     default: return state;
   }
 };

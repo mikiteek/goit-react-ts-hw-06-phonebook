@@ -33,6 +33,13 @@ const toggleNotify = notify => ({
   }
 });
 
+const getContactsFromLocalStorage = contacts => ({
+  type: actionTypes.GET_LOCAL,
+  payload: {
+    contacts,
+  },
+});
+
 export default {
-  addContact, deleteContact, changeFilter, toggleNotify: toggleNotify
+  addContact, deleteContact, changeFilter, toggleNotify, getContactsFromLocalStorage
 }
