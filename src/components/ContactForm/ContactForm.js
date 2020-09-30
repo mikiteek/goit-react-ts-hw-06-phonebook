@@ -18,10 +18,15 @@ class ContactForm extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const {name, number} = this.state;
+    const {onSubmit, onShowNotify, contacts} = this.props;
 
     if (name === "" || number === "")
       return;
-    this.props.onSubmit({name, number});
+    if (contacts.findIndex(contact => contact.name === name) !== -1) {
+      onShowNotify(true);
+      return;
+    }
+    onSubmit({name, number});
   }
   handleChange = event => {
     const {name, value} = event.target;
@@ -48,8 +53,13 @@ class ContactForm extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  contacts: state.contacts.items,
+})
+
 const mapDispatchToProps = {
-  onSubmit: contactsActions.addContact
+  onSubmit: contactsActions.addContact,
+  onShowNotify: contactsActions.toggleNotify
 }
 
-export default connect(null, mapDispatchToProps)(ContactForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

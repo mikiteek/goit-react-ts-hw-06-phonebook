@@ -26,6 +26,13 @@ const changeFilter = filter => ({
   },
 });
 
+const toggleNotify = notify => ({
+  type: actionTypes.TOGGLE_NOTIFY,
+  payload: {
+    notify: notify,
+  }
+});
+
 export default {
-  addContact, deleteContact, changeFilter
+  addContact, deleteContact, changeFilter, toggleNotify: toggleNotify
 }

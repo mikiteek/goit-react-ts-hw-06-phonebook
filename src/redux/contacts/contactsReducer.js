@@ -19,7 +19,16 @@ const filter = (state = "", {type, payload}) => {
   }
 };
 
+const notify = (state = false, {type, payload}) => {
+  switch (type) {
+    case actionTypes.TOGGLE_NOTIFY:
+      return payload.notify;
+    default: return state;
+  }
+}
+
 export default combineReducers({
   items, // items: items,
-  filter // filter: filter,
+  filter, // filter: filter,
+  notify,
 })
