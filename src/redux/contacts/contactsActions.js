@@ -1,8 +1,7 @@
 import {v4 as uuid} from "uuid";
-import actionTypes from "./contactsTypes";
+import {createAction} from "@reduxjs/toolkit";
 
-const addContact = ({name, number}) => ({
-  type: actionTypes.ADD_CONTACT,
+const addContact = createAction("contact/add", ({name, number}) => ({
   payload: {
     contact: {
       id: uuid(),
@@ -10,32 +9,15 @@ const addContact = ({name, number}) => ({
       number,
     },
   },
-});
+}));
 
-const deleteContact = idContact => ({
-  type: actionTypes.DELETE_CONTACT,
-  payload: {
-    idContact,
-  },
-});
+const deleteContact = createAction("contact/delete");
 
-const changeFilter = filter => ({
-  type: actionTypes.UPDATE_FILTER,
-  payload: {
-    filter,
-  },
-});
+const changeFilter = createAction("contact/changeFilter");
 
-const toggleNotify = () => ({
-  type: actionTypes.TOGGLE_NOTIFY,
-});
+const toggleNotify = createAction("contact/toggleNotify");
 
-const getContactsFromLocalStorage = contacts => ({
-  type: actionTypes.GET_LOCAL,
-  payload: {
-    contacts,
-  },
-});
+const getContactsFromLocalStorage = createAction("contact/getContactsFromLocalStorage");
 
 export default {
   addContact, deleteContact, changeFilter, toggleNotify, getContactsFromLocalStorage
