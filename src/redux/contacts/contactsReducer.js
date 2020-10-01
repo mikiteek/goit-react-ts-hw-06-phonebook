@@ -1,33 +1,21 @@
 import {combineReducers} from "redux";
-import actionTypes from "./contactsTypes";
+import {createReducer} from "@reduxjs/toolkit";
+import contactsActions from "./contactsActions";
 
-const items = (state = [], {type, payload}) => {
-  switch (type) {
-    case actionTypes.ADD_CONTACT:
-      return [...state, payload.contact];
-    case actionTypes.DELETE_CONTACT:
-      return state.filter(contact => contact.id !== payload.idContact);
-    case actionTypes.GET_LOCAL:
-      return payload.contacts;
-    default: return state;
-  }
-};
+const items = createReducer([], {
+  [contactsActions.addContact]: (state, action) => [...state, action.payload.contact],
+  [contactsActions.deleteContact]: (state, action) => state.filter(contact => contact.id !== action.payload),
+  [contactsActions.getContactsFromLocalStorage]: (state, action) => action.payload,
+});
 
-const filter = (state = "", {type, payload}) => {
-  switch (type) {
-    case actionTypes.UPDATE_FILTER:
-      return payload.filter;
-    default: return state;
-  }
-};
+const filter = createReducer("", {
+  [contactsActions.changeFilter]: (state, action) => action.payload,
+})
 
-const notify = (state = false, {type, payload}) => {
-  switch (type) {
-    case actionTypes.TOGGLE_NOTIFY:
-      return !state;
-    default: return state;
-  }
-}
+const notify = createReducer(false, {
+  [contactsActions.toggleNotify]: state => !state,
+})
+
 
 export default combineReducers({
   items, // items: items,
