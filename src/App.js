@@ -18,7 +18,7 @@ class App extends Component {
       localStorage.setItem("contacts", JSON.stringify(contacts));
     }
     if (notify) {
-      setTimeout(this.hiddenNotify, 2000);
+      setTimeout(this.hiddenNotify, 2500);
     }
   }
   componentDidMount() { // как быть сдесь? как записать исходные данные
@@ -30,7 +30,7 @@ class App extends Component {
   }
 
   hiddenNotify = () => {
-    this.props.onHiddenNotify(false);
+    this.props.onHiddenNotify();
   }
 
   render() {

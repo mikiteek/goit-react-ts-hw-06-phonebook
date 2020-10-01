@@ -26,11 +26,8 @@ const changeFilter = filter => ({
   },
 });
 
-const toggleNotify = notify => ({
+const toggleNotify = () => ({
   type: actionTypes.TOGGLE_NOTIFY,
-  payload: {
-    notify: notify,
-  }
 });
 
 const getContactsFromLocalStorage = contacts => ({
