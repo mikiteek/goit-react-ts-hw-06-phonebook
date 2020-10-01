@@ -24,7 +24,7 @@ const filter = (state = "", {type, payload}) => {
 const notify = (state = false, {type, payload}) => {
   switch (type) {
     case actionTypes.TOGGLE_NOTIFY:
-      return payload.notify;
+      return !state;
     default: return state;
   }
 }

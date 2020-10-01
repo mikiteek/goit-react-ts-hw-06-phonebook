@@ -23,7 +23,7 @@ class ContactForm extends Component {
     if (name === "" || number === "")
       return;
     if (contacts.findIndex(contact => contact.name === name) !== -1) {
-      onShowNotify(true);
+      onShowNotify();
       return;
     }
     onSubmit({name, number});

@@ -6,7 +6,7 @@ class ContactNotifyExist extends Component {
   render() {
     return (
       <div className={styles.notifyBlock}>
-        <p>Contact already exist</p>
+        <p>Contact already exist!!</p>
       </div>
     );
   }
