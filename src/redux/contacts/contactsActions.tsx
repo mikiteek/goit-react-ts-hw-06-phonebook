@@ -1,7 +1,7 @@
 import {v4 as uuid} from "uuid";
 import {createAction} from "@reduxjs/toolkit";
 
-const addContact = createAction("contact/add", ({name, number}) => ({
+const addContact = createAction("contact/add", ({name, number}:{name: string, number: string}) => ({
   payload: {
     contact: {
       id: uuid(),

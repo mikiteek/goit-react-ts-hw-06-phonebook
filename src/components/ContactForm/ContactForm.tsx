@@ -37,16 +37,21 @@ class ContactForm extends Component<propTypes, stateTypes> {
       return;
     if (contacts.findIndex(contact => contact.name === name) !== -1) {
       onShowNotify();
+      this.clearInputClearState();
       return;
     }
     onSubmit({name, number});
-    this.setState({name: "", number: ""});
-    this.clearInputContactsData();
+    this.clearInputClearState();
   }
 
   private clearInputContactsData = (): void => {
     const inputRefs = document.querySelectorAll(".js-form-input");
     inputRefs.forEach((inputItem: any) => inputItem.value = "");
+  }
+
+  private clearInputClearState = (): void => {
+    this.setState({name: "", number: ""});
+    this.clearInputContactsData();
   }
 
   private handleChange = (event: any): void => {
