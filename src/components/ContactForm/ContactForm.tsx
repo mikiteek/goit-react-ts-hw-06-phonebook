@@ -1,21 +1,34 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import PropTypes from "prop-types";
 import {CSSTransition} from "react-transition-group";
 import contactsActions from "../../redux/contacts/contactsActions";
 import styles from "./ContactForm.module.scss";
 import "./ContactFormAnimation.css";
 
+interface stateTypes {
+  name: string,
+  number: string,
+}
 
-class ContactForm extends Component {
+interface contactTypes {
+  name: string,
+  number: string,
+  id: string,
+}
+
+interface propTypes {
+  onSubmit: any,
+  onShowNotify: any,
+  contacts: contactTypes[],
+}
+
+class ContactForm extends Component<propTypes, stateTypes> {
   state = {
     name: "",
     number: "",
   }
-  static propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-  }
-  handleSubmit = event => {
+
+  private handleSubmit = (event: any): void => {
     event.preventDefault();
     const {name, number} = this.state;
     const {onSubmit, onShowNotify, contacts} = this.props;
@@ -31,14 +44,14 @@ class ContactForm extends Component {
     this.clearInputContactsData();
   }
 
-  clearInputContactsData = () => {
+  private clearInputContactsData = (): void => {
     const inputRefs = document.querySelectorAll(".js-form-input");
-    inputRefs.forEach(inputItem => inputItem.value = "");
+    inputRefs.forEach((inputItem: any) => inputItem.value = "");
   }
 
-  handleChange = event => {
+  private handleChange = (event: any): void => {
     const {name, value} = event.target;
-    this.setState({[name]: value});
+    this.setState({[name]: value} as any);
   }
 
   render() {
@@ -61,7 +74,7 @@ class ContactForm extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
   contacts: state.contacts.items,
 })
 

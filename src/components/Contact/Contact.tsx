@@ -1,18 +1,18 @@
 import React, {Component} from "react";
-import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import contactsActions from "../../redux/contacts/contactsActions";
 import styles from "./Contact.module.scss";
 
+interface propTypes {
+  name: string,
+  number: string,
+  id: string,
+  onDeleteContact: any,
+}
 
-class Contact extends Component {
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    number: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired
-  }
+class Contact extends Component<propTypes> {
 
-  handleDeleteContact = () => {
+  private handleDeleteContact = (): void => {
     const {onDeleteContact, id} = this.props;
     onDeleteContact(id);
   }
