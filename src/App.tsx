@@ -10,9 +10,23 @@ import Filter from "./components/Filter/Filter";
 import ContactNotifyExist from "./components/ContactNotifyExist/ContactNotifyExist";
 import "./AppAnimation.css";
 
-class App extends Component {
+interface contactTypes {
+  name: string,
+  number: string,
+  id: string,
+}
 
-  componentDidUpdate(prevProps) {
+interface propTypes {
+  visibleContacts: contactTypes[],
+  contacts: contactTypes[],
+  notify: boolean,
+  onHiddenNotify: any,
+  saveContactsFromLS: any,
+}
+
+class App extends Component<propTypes> {
+
+  componentDidUpdate(prevProps: propTypes) {
     const {contacts, notify} = this.props;
     if (prevProps.contacts !== contacts) {
       localStorage.setItem("contacts", JSON.stringify(contacts));
@@ -21,7 +35,7 @@ class App extends Component {
       setTimeout(this.hiddenNotify, 2500);
     }
   }
-  componentDidMount() { // как быть сдесь? как записать исходные данные
+  componentDidMount() {
     const contactsLocalStorage = localStorage.getItem("contacts");
     const {saveContactsFromLS} = this.props;
     if (contactsLocalStorage) {
@@ -29,7 +43,7 @@ class App extends Component {
     }
   }
 
-  hiddenNotify = () => {
+  private hiddenNotify = (): void => {
     this.props.onHiddenNotify();
   }
 
@@ -59,10 +73,10 @@ class App extends Component {
 
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: any) => {
   const {items, filter, notify} = state.contacts;
   return {
-    visibleContacts: items.filter(({name}) => name.toLowerCase().includes(filter.toLowerCase())),
+    visibleContacts: items.filter(({name}:{name: string}) => name.toLowerCase().includes(filter.toLowerCase())),
     contacts: state.contacts.items,
     notify,
   }
